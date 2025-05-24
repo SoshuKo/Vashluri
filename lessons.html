@@ -50,12 +50,13 @@
         data.lessons.forEach(lesson => {
           const card = document.createElement('div');
           card.className = 'lesson-card';
-          card.innerHTML = `<a href="lesson${lesson.id}.html">レッスン ${lesson.id}</a>`;
+          card.innerHTML = `<a href="lesson.html?id=${lesson.id}">レッスン ${lesson.id}</a>`;
           list.appendChild(card);
         });
       })
       .catch(error => {
         console.error('レッスンデータの取得に失敗しました:', error);
+        document.getElementById('lessonList').textContent = '読み込みエラーが発生しました。';
       });
   </script>
 </body>
