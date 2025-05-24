@@ -60,7 +60,69 @@
           "answer": "შეხვედრამდე"
         }
       ]
+    },
+    {
+  "id": 2,
+  "title": "基礎語彙①",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "დედა の意味は？",
+      "choices": ["父", "母", "兄", "妹"],
+      "answer": "母"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「父」は？",
+      "answer": "მამა"
+    },
+    {
+      "type": "choice",
+      "question": "ძმა はどれを意味する？",
+      "choices": ["姉", "兄弟", "祖父", "友達"],
+      "answer": "兄弟"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「友達」は？",
+      "answer": "მეგობარი"
+    },
+    {
+      "type": "choice",
+      "question": "დედა と მამა を合わせて何になる？",
+      "choices": ["家族", "兄妹", "親", "先生"],
+      "answer": "親"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「水」は？",
+      "answer": "წყალი"
+    },
+    {
+      "type": "choice",
+      "question": "პური の意味は？",
+      "choices": ["魚", "チーズ", "パン", "肉"],
+      "answer": "パン"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「肉」は？",
+      "answer": "ხორცი"
+    },
+    {
+      "type": "choice",
+      "question": "დრონი の意味は？",
+      "choices": ["時間", "空", "山", "川"],
+      "answer": "時間"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「言葉・単語」は？",
+      "answer": "სიტყვა"
     }
+  ]
+}
+
   ]
 }
 
