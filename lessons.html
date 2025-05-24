@@ -60,7 +60,8 @@
   </div>
 
   <script>
-    fetch('lessons.json')
+    const cacheBuster = Date.now(); // 時間ベースで毎回キャッシュバイパス
+    fetch('lessons.json?v=' + cacheBuster)
       .then(response => response.json())
       .then(data => {
         const list = document.getElementById('lessonList');
@@ -78,3 +79,4 @@
   </script>
 </body>
 </html>
+
