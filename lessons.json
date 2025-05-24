@@ -182,7 +182,495 @@
       "answer": "მარცხენა"
     }
   ]
-}
+},
+    {
+  "id": 4,
+  "title": "基礎語彙③",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ცა の意味は？",
+      "choices": ["雲", "風", "空", "山"],
+      "answer": "空"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「山」は？",
+      "answer": "მთა"
+    },
+    {
+      "type": "choice",
+      "question": "მზიანი の意味は？",
+      "choices": ["曇り", "雨", "晴れ", "雪"],
+      "answer": "晴れ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「雨（の）」は？",
+      "answer": "წვიმიანი"
+    },
+    {
+      "type": "choice",
+      "question": "წითელი の意味は？",
+      "choices": ["赤", "青", "白", "黒"],
+      "answer": "赤"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「青」は？",
+      "answer": "ლურჯი"
+    },
+    {
+      "type": "choice",
+      "question": "სწორი の意味は？",
+      "choices": ["まるい", "曲がった", "正しい", "速い"],
+      "answer": "正しい"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「間違っている」は？",
+      "answer": "არასწორი"
+    },
+    {
+      "type": "choice",
+      "question": "სუფთა の意味は？",
+      "choices": ["汚い", "静か", "新しい", "清潔な"],
+      "answer": "清潔な"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「汚い」は？",
+      "answer": "ბინძური"
+    }
+  ]
+},
+{
+  "id": 5,
+  "title": "基礎語彙④",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "მაგიდა の意味は？",
+      "choices": ["椅子", "机", "棚", "ドア"],
+      "answer": "机"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「椅子」は？",
+      "answer": "სკამი"
+    },
+    {
+      "type": "choice",
+      "question": "კარი の意味は？",
+      "choices": ["窓", "壁", "戸棚", "ドア"],
+      "answer": "ドア"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「窓」は？",
+      "answer": "ფანჯარა"
+    },
+    {
+      "type": "choice",
+      "question": "შავი の意味は？",
+      "choices": ["赤", "黒", "緑", "黄色"],
+      "answer": "黒"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「緑（色）」は？",
+      "answer": "მწვანე"
+    },
+    {
+      "type": "choice",
+      "question": "მცირე の意味は？",
+      "choices": ["小さい", "長い", "重い", "広い"],
+      "answer": "小さい"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「大きい」は？",
+      "answer": "დიდი"
+    },
+    {
+      "type": "choice",
+      "question": "გრძელი の意味は？",
+      "choices": ["深い", "短い", "長い", "低い"],
+      "answer": "長い"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「短い」は？",
+      "answer": "მოკლე"
+    }
+  ]
+},
+{
+  "id": 6,
+  "title": "基礎語彙⑤",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ტანსაცმელი の意味は？",
+      "choices": ["靴", "帽子", "服", "手袋"],
+      "answer": "服"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「靴」は？",
+      "answer": "ფეხსაცმელი"
+    },
+    {
+      "type": "choice",
+      "question": "თვალი の意味は？",
+      "choices": ["鼻", "耳", "目", "口"],
+      "answer": "目"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「耳」は？",
+      "answer": "ყური"
+    },
+    {
+      "type": "choice",
+      "question": "ოთახი の意味は？",
+      "choices": ["壁", "天井", "家", "部屋"],
+      "answer": "部屋"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「天井」は？",
+      "answer": "ჭერი"
+    },
+    {
+      "type": "choice",
+      "question": "სწრაფი の意味は？",
+      "choices": ["強い", "速い", "軽い", "寒い"],
+      "answer": "速い"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「重い」は？",
+      "answer": "მძიმე"
+    },
+    {
+      "type": "choice",
+      "question": "დრო の意味は？",
+      "choices": ["空間", "道", "時間", "位置"],
+      "answer": "時間"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「場所」は？",
+      "answer": "ადგილი"
+    }
+  ]
+},
+{
+  "id": 7,
+  "title": "基礎語彙⑥",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ერთი の意味は？",
+      "choices": ["1", "2", "3", "4"],
+      "answer": "1"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「2」は？",
+      "answer": "ორი"
+    },
+    {
+      "type": "choice",
+      "question": "ეს の意味は？",
+      "choices": ["あれ", "どれ", "それ", "これ"],
+      "answer": "これ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「あれ」は？",
+      "answer": "ის"
+    },
+    {
+      "type": "choice",
+      "question": "მარჯვნივ の意味は？",
+      "choices": ["左へ", "右へ", "後ろへ", "前へ"],
+      "answer": "右へ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「左へ」は？",
+      "answer": "მარცხნივ"
+    },
+    {
+      "type": "choice",
+      "question": "ბედნიერი の意味は？",
+      "choices": ["怒っている", "悲しい", "うれしい", "眠い"],
+      "answer": "うれしい"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「悲しい」は？",
+      "answer": "მოწყენილი"
+    },
+    {
+      "type": "choice",
+      "question": "ხშირად の意味は？",
+      "choices": ["ときどき", "たまに", "しばしば", "決して"],
+      "answer": "しばしば"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「ときどき」は？",
+      "answer": "ხანდახან"
+    }
+  ]
+},
+{
+  "id": 8,
+  "title": "基礎語彙⑦",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "თოვლი の意味は？",
+      "choices": ["雲", "雨", "雪", "風"],
+      "answer": "雪"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「風」は？",
+      "answer": "ქარი"
+    },
+    {
+      "type": "choice",
+      "question": "ცივი の意味は？",
+      "choices": ["暑い", "寒い", "速い", "軽い"],
+      "answer": "寒い"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「暑い（熱い）」は？",
+      "answer": "ცხელი"
+    },
+    {
+      "type": "choice",
+      "question": "მაღალი の意味は？",
+      "choices": ["重い", "広い", "高い", "深い"],
+      "answer": "高い"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「低い」は？",
+      "answer": "დაბალი"
+    },
+    {
+      "type": "choice",
+      "question": "საღამო の意味は？",
+      "choices": ["朝", "昼", "夜", "夕方"],
+      "answer": "夕方"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「朝」は？",
+      "answer": "დილა"
+    },
+    {
+      "type": "choice",
+      "question": "ხიდი の意味は？",
+      "choices": ["道", "線路", "橋", "階段"],
+      "answer": "橋"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「階段」は？",
+      "answer": "კიბე"
+    }
+  ]
+},
+{
+  "id": 9,
+  "title": "基礎語彙⑧",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "სიყვარული の意味は？",
+      "choices": ["正義", "愛", "平和", "自由"],
+      "answer": "愛"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「自由」は？",
+      "answer": "თავისუფლება"
+    },
+    {
+      "type": "choice",
+      "question": "მეგობრობა の意味は？",
+      "choices": ["友情", "優しさ", "希望", "協力"],
+      "answer": "友情"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「正義」は？",
+      "answer": "სამართლიანობა"
+    },
+    {
+      "type": "choice",
+      "question": "ზემოთ の意味は？",
+      "choices": ["下に", "奥に", "上に", "前に"],
+      "answer": "上に"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「下に」は？",
+      "answer": "ქვემოთ"
+    },
+    {
+      "type": "choice",
+      "question": "მრგვალი の意味は？",
+      "choices": ["長方形", "丸い", "小さい", "鋭い"],
+      "answer": "丸い"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「四角い」は？",
+      "answer": "კვადრატი"
+    },
+    {
+      "type": "choice",
+      "question": "გაბრაზებული の意味は？",
+      "choices": ["楽しい", "怒っている", "驚いている", "幸せな"],
+      "answer": "怒っている"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「すぐに」は？",
+      "answer": "მაშინვე"
+    }
+  ]
+},
+{
+  "id": 10,
+  "title": "基礎語彙⑨",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ქუდი の意味は？",
+      "choices": ["手袋", "靴", "帽子", "スカーフ"],
+      "answer": "帽子"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「手袋」は？",
+      "answer": "ხელთათმანი"
+    },
+    {
+      "type": "choice",
+      "question": "ხილი の意味は？",
+      "choices": ["野菜", "肉", "水", "果物"],
+      "answer": "果物"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「野菜」は？",
+      "answer": "ბოსტნეული"
+    },
+    {
+      "type": "choice",
+      "question": "ხის の意味は？",
+      "choices": ["鉄の", "ガラスの", "木製の", "金属の"],
+      "answer": "木製の"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「鉄の」は？",
+      "answer": "რკინის"
+    },
+    {
+      "type": "choice",
+      "question": "მეგობრული の意味は？",
+      "choices": ["冷たい", "優しい", "無関心な", "賢い"],
+      "answer": "優しい"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「冷たい（態度が）」は？",
+      "answer": "ცივი"
+    },
+    {
+      "type": "choice",
+      "question": "თავი の意味は？",
+      "choices": ["手", "足", "目", "頭"],
+      "answer": "頭"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「電車」は？",
+      "answer": "მატარებელი"
+    }
+  ]
+},
+{
+  "id": 11,
+  "title": "基礎語彙⑩",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ბიბლიოთეკა の意味は？",
+      "choices": ["郵便局", "銀行", "図書館", "学校"],
+      "answer": "図書館"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「郵便局」は？",
+      "answer": "ფოსტა"
+    },
+    {
+      "type": "choice",
+      "question": "შუშის の意味は？",
+      "choices": ["木の", "金の", "ガラスの", "布の"],
+      "answer": "ガラスの"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「金属の」は？",
+      "answer": "ლითონის"
+    },
+    {
+      "type": "choice",
+      "question": "გონება の意味は？",
+      "choices": ["力", "心", "時間", "知性・思考"],
+      "answer": "知性・思考"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「心（感情的な意味で）」は？",
+      "answer": "გული"
+    },
+    {
+      "type": "choice",
+      "question": "დილით の意味は？",
+      "choices": ["昼に", "朝に", "夜に", "夕方に"],
+      "answer": "朝に"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「夜に」は？",
+      "answer": "ღამით"
+    },
+    {
+      "type": "choice",
+      "question": "მასწავლებელი の意味は？",
+      "choices": ["医者", "教師", "学生", "看護師"],
+      "answer": "教師"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「医者」は？",
+      "answer": "ექიმი"
+    }
+  ]
+},
   ]
 }
 
