@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>レッスン一覧 - ვაშლური</title>
+  <style>
+    body {
+      font-family: 'Helvetica', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #d63031;
+    }
+    .lesson-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    .lesson-card {
+      background-color: #ffeaa7;
+      border: 1px solid #dfe6e9;
+      border-radius: 8px;
+      padding: 20px;
+      width: 150px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .lesson-card a {
+      text-decoration: none;
+      color: #2d3436;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>レッスン一覧</h1>
+  <div class="lesson-list" id="lessonList"></div>
+
+  <script>
+    fetch('lessons.json')
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById('lessonList');
+        data.lessons.forEach(lesson => {
+          const card = document.createElement('div');
+          card.className = 'lesson-card';
+          card.innerHTML = `<a href="lesson${lesson.id}.html">レッスン ${lesson.id}</a>`;
+          list.appendChild(card);
+        });
+      })
+      .catch(error => {
+        console.error('レッスンデータの取得に失敗しました:', error);
+      });
+  </script>
+</body>
+</html>
