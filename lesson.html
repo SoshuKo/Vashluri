@@ -131,11 +131,11 @@
       document.getElementById('finalResult').innerHTML = `
         <p>レッスン完了！</p>
         <p>スコア：${score} / ${quizzes.length}</p>
-        <a href="lessons.html" class="next-btn">レッスン選択ページに戻る</a>
+        <a href="lessons.html?v=1" class="next-btn">レッスン選択ページに戻る</a>
       `;
     }
 
-    fetch('lessons.json')
+    fetch('lessons.json?v=' + Date.now())
       .then(response => response.json())
       .then(data => {
         const lesson = data.lessons.find(l => l.id == lessonId);
