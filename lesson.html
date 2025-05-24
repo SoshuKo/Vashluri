@@ -143,6 +143,7 @@
           document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
           return;
         }
+        document.getElementById('lessonId').textContent = `${lessonId}：${lesson.title}`;
         quizzes = lesson.quizzes;
         showQuiz(currentQuiz);
       })
