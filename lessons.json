@@ -2,6 +2,7 @@
   "lessons": [
     {
       "id": 1,
+      "title": "基本の挨拶",
       "quizzes": [
         {
           "type": "choice",
