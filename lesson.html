@@ -68,43 +68,53 @@
     let score = 0;
     let quizzes = [];
 
-    function showQuiz(index) {
-      const container = document.getElementById('quizContainer');
-      container.innerHTML = '';
-      document.getElementById('result').textContent = '';
+function showQuiz(index) {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('result').textContent = '';
 
-      const quiz = quizzes[index];
-      if (!quiz) return;
+  const quiz = quizzes[index];
+  if (!quiz) return;
 
-      const block = document.createElement('div');
-      block.className = 'quiz-block';
+  const block = document.createElement('div');
+  block.className = 'quiz-block';
 
-      const title = document.createElement('p');
-      title.textContent = `Q${index + 1}: ${quiz.question}`;
-      block.appendChild(title);
+  const title = document.createElement('p');
+  title.textContent = `Q${index + 1}: ${quiz.question}`;
+  block.appendChild(title);
 
-      if (quiz.type === 'choice') {
-        quiz.choices.forEach(choice => {
-          const btn = document.createElement('button');
-          btn.textContent = choice;
-          btn.onclick = () => checkAnswer(choice === quiz.answer, quiz.answer);
-          block.appendChild(btn);
-        });
-      } else if (quiz.type === 'input') {
-        const inputWrap = document.createElement('div');
-        inputWrap.className = 'input-answer';
-        const input = document.createElement('input');
-        const submit = document.createElement('button');
-        submit.className = 'submit-btn';
-        submit.textContent = '送信';
-        submit.onclick = () => checkAnswer(input.value.trim() === quiz.answer, quiz.answer);
-        inputWrap.appendChild(input);
-        inputWrap.appendChild(submit);
-        block.appendChild(inputWrap);
-      }
+  if (quiz.type === 'choice') {
+    quiz.choices.forEach(choice => {
+      const btn = document.createElement('button');
+      btn.textContent = choice;
+      btn.onclick = () => checkAnswer(choice === quiz.answer, quiz.answer);
+      block.appendChild(btn);
+    });
+  } else if (quiz.type === 'input') {
+    const inputWrap = document.createElement('div');
+    inputWrap.className = 'input-answer';
+    const input = document.createElement('input');
+    const submit = document.createElement('button');
+    submit.className = 'submit-btn';
+    submit.textContent = '送信';
+    submit.onclick = () => checkAnswer(input.value.trim() === quiz.answer, quiz.answer);
+    inputWrap.appendChild(input);
+    inputWrap.appendChild(submit);
+    block.appendChild(inputWrap);
+  }
 
-      container.appendChild(block);
-    }
+  // ▼ カンニングボタン
+  const hintBtn = document.createElement('button');
+  hintBtn.textContent = '答えを見る';
+  hintBtn.className = 'submit-btn';
+  hintBtn.style.backgroundColor = '#636e72';
+  hintBtn.onclick = () => {
+    alert(`正解：${quiz.answer}`);
+  };
+  block.appendChild(hintBtn);
+
+  container.appendChild(block);
+}
 
     function checkAnswer(isCorrect, correctAnswer) {
       const result = document.getElementById('result');
