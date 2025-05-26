@@ -9,6 +9,7 @@
       font-family: 'Helvetica', sans-serif;
       padding: 20px;
       background-color: #e8f0fe;
+      position: relative;
     }
     h1 {
       color: #d63031;
@@ -98,14 +99,38 @@
       font-size: 1.3em;
       margin-top: 30px;
     }
+    #judgeMark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      font-weight: bold;
+      color: #00b894;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    #judgeMark.incorrect {
+      color: #d63031;
+    }
+    #timerDisplay {
+      text-align: center;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      color: #636e72;
+    }
   </style>
 </head>
 <body>
   <h1>レッスン <span id="lessonId"></span></h1>
   <div id="scoreDisplay"></div>
+  <div id="timerDisplay"></div>
   <div id="quizContainer"></div>
   <div id="result"></div>
   <div id="finalResult"></div>
+  <div id="judgeMark"></div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -115,6 +140,8 @@
     let currentQuiz = 0;
     let score = 0;
     let quizzes = [];
+    let timer = 0;
+    let timerInterval;
 
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -126,6 +153,33 @@
 
     function updateScoreDisplay() {
       document.getElementById('scoreDisplay').textContent = `スコア：${score} / ${quizzes.length}`;
+    }
+
+    function updateTimerDisplay() {
+      const min = String(Math.floor(timer / 60)).padStart(2, '0');
+      const sec = String(timer % 60).padStart(2, '0');
+      document.getElementById('timerDisplay').textContent = `タイム：${min}:${sec}`;
+    }
+
+    function startTimer() {
+      timer = 0;
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        timer++;
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    function showJudgeMark(isCorrect) {
+      const mark = document.getElementById('judgeMark');
+      mark.textContent = isCorrect ? '◯' : '×';
+      mark.className = isCorrect ? '' : 'incorrect';
+      mark.style.opacity = 1;
+      setTimeout(() => { mark.style.opacity = 0; }, 1000);
     }
 
     function showQuiz(index) {
@@ -154,7 +208,9 @@
             if (answered) return;
             answered = true;
             disableAllButtons(block);
-            checkAnswer(choice === quiz.answer, quiz.answer);
+            const correct = choice === quiz.answer;
+            checkAnswer(correct, quiz.answer);
+            showJudgeMark(correct);
           };
           block.appendChild(btn);
         });
@@ -169,7 +225,9 @@
           if (answered) return;
           answered = true;
           disableAllButtons(block);
-          checkAnswer(input.value.trim() === quiz.answer, quiz.answer);
+          const correct = input.value.trim() === quiz.answer;
+          checkAnswer(correct, quiz.answer);
+          showJudgeMark(correct);
         };
         inputWrap.appendChild(input);
 
@@ -220,6 +278,7 @@
         if (currentQuiz < quizzes.length) {
           showQuiz(currentQuiz);
         } else {
+          stopTimer();
           showFinalResult();
         }
       };
@@ -232,6 +291,7 @@
       document.getElementById('finalResult').innerHTML = `
         <p>🎉 レッスン完了！</p>
         <p>スコア：${score} / ${quizzes.length}</p>
+        <p>タイム：${document.getElementById('timerDisplay').textContent.replace('タイム：', '')}</p>
         <a href="lessons.html?v=1" class="next-btn">レッスン選択ページに戻る</a>
       `;
     }
@@ -246,6 +306,7 @@
         }
         document.getElementById('lessonId').textContent = `${lessonId}：${lesson.title}`;
         quizzes = shuffle([...lesson.quizzes]);
+        startTimer();
         showQuiz(currentQuiz);
       })
       .catch(error => {
