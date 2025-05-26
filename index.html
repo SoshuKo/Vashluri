@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: 'Helvetica', sans-serif;
-      background-color: #f9f9f9;
+      background-color: #e8f0fe;
       margin: 0;
       padding: 0;
       text-align: center;
@@ -16,36 +16,58 @@
     header {
       background-color: #d63031;
       color: white;
-      padding: 20px;
+      padding: 30px 20px 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     h1 {
       margin: 0;
-      font-size: 2em;
+      font-size: 2.2em;
+    }
+    p {
+      font-size: 1.1em;
+      margin-top: 10px;
     }
     .logo {
       margin-top: 10px;
+      transition: transform 0.3s;
+    }
+    .logo:hover {
+      transform: scale(1.1);
     }
     nav {
-      margin: 20px;
+      margin: 30px;
     }
     nav a {
       display: inline-block;
       margin: 10px;
-      padding: 10px 20px;
+      padding: 14px 28px;
       background-color: #0984e3;
       color: white;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      transition: background-color 0.3s, transform 0.1s;
+    }
+    nav a:hover {
+      background-color: #74b9ff;
+      transform: scale(1.05);
     }
     footer {
-      margin-top: 40px;
+      margin-top: 50px;
       padding: 20px;
-      font-size: 0.9em;
+      font-size: 0.95em;
+      background-color: #dfe6e9;
+      color: #2d3436;
     }
     footer a {
-      margin: 0 10px;
+      margin: 0 12px;
       color: #2d3436;
       text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    footer a:hover {
+      color: #0984e3;
     }
   </style>
 </head>
@@ -57,7 +79,7 @@
   </header>
 
   <nav>
-    <a href="lessons.html?v=1">レッスン一覧へ</a>
+    <a href="lessons.html?v=1">📚 レッスン一覧へ</a>
   </nav>
 
   <footer>
@@ -67,3 +89,4 @@
   </footer>
 </body>
 </html>
+
