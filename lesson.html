@@ -61,6 +61,26 @@
       border-radius: 6px;
       margin-bottom: 10px;
     }
+    .virtual-keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .vk-button {
+      padding: 10px 14px;
+      background-color: #dfe6e9;
+      border: 1px solid #b2bec3;
+      border-radius: 6px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .vk-button:hover {
+      background-color: #b2bec3;
+      transform: scale(1.05);
+    }
     #result {
       text-align: center;
       font-weight: bold;
@@ -120,8 +140,24 @@
         submit.textContent = '送信';
         submit.onclick = () => checkAnswer(input.value.trim() === quiz.answer, quiz.answer);
         inputWrap.appendChild(input);
+
+        const keyboard = document.createElement('div');
+        keyboard.className = 'virtual-keyboard';
+        const georgianLetters = [..."აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ"];
+        georgianLetters.forEach(char => {
+          const key = document.createElement('button');
+          key.className = 'vk-button';
+          key.textContent = char;
+          key.onclick = () => {
+            input.value += char;
+            input.focus();
+          };
+          keyboard.appendChild(key);
+        });
+
         inputWrap.appendChild(submit);
         block.appendChild(inputWrap);
+        block.appendChild(keyboard);
       }
 
       const hintBtn = document.createElement('button');
