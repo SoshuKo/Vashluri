@@ -62,6 +62,246 @@
   ]
 },
     {
+  "id": "B",
+  "title": "文字②：破裂音系",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "პ の発音はどれ？",
+      "choices": ["b（バ行）", "p（パ行）", "pʼ（強いパ行）", "d（ダ行）"],
+      "answer": "pʼ（強いパ行）"
+    },
+    {
+      "type": "choice",
+      "question": "ბ の発音はどれ？",
+      "choices": ["p", "b", "t", "d"],
+      "answer": "b"
+    },
+    {
+      "type": "choice",
+      "question": "ტ の発音はどれ？",
+      "choices": ["t", "tʼ", "d", "kʼ"],
+      "answer": "tʼ"
+    },
+    {
+      "type": "choice",
+      "question": "თ の発音はどれ？",
+      "choices": ["t", "tʼ", "d", "k"],
+      "answer": "t"
+    },
+    {
+      "type": "choice",
+      "question": "დ の発音はどれ？",
+      "choices": ["t", "tʼ", "d", "dʼ"],
+      "answer": "d"
+    },
+    {
+      "type": "choice",
+      "question": "კ の発音はどれ？",
+      "choices": ["g", "k", "kʼ", "kh"],
+      "answer": "kʼ"
+    },
+    {
+      "type": "choice",
+      "question": "ქ の発音はどれ？",
+      "choices": ["k", "g", "kʼ", "pʼ"],
+      "answer": "k"
+    },
+    {
+      "type": "choice",
+      "question": "გ の発音はどれ？",
+      "choices": ["k", "g", "t", "d"],
+      "answer": "g"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「b（バ行）」に対応する文字は？",
+      "answer": "ბ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「tʼ（強いタ行）」に対応する文字は？",
+      "answer": "ტ"
+    }
+  ]
+},
+    {
+  "id": "C",
+  "title": "文字③：破擦音系",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ც の発音はどれ？",
+      "choices": ["ts", "dz", "tsʼ", "ch"],
+      "answer": "ts"
+    },
+    {
+      "type": "choice",
+      "question": "წ の発音はどれ？",
+      "choices": ["ts", "dz", "tsʼ", "sʼ"],
+      "answer": "tsʼ"
+    },
+    {
+      "type": "choice",
+      "question": "ძ の発音はどれ？",
+      "choices": ["ts", "dz", "tsʼ", "z"],
+      "answer": "dz"
+    },
+    {
+      "type": "choice",
+      "question": "ჩ の発音はどれ？",
+      "choices": ["ch", "chʼ", "ts", "j"],
+      "answer": "ch"
+    },
+    {
+      "type": "choice",
+      "question": "ჭ の発音はどれ？",
+      "choices": ["ch", "tsʼ", "chʼ", "j"],
+      "answer": "chʼ"
+    },
+    {
+      "type": "choice",
+      "question": "ჯ の発音はどれ？",
+      "choices": ["dz", "j", "zh", "ch"],
+      "answer": "j"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「tsʼ（強いツ）」に対応する文字は？",
+      "answer": "წ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「dz」に対応する文字は？",
+      "answer": "ძ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「chʼ（強いチ）」に対応する文字は？",
+      "answer": "ჭ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「j（ヂ）」に対応する文字は？",
+      "answer": "ჯ"
+    }
+  ]
+},
+    {
+  "id": "D",
+  "title": "文字④：摩擦音系",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ვ の発音はどれ？",
+      "choices": ["v", "w", "b", "f"],
+      "answer": "v"
+    },
+    {
+      "type": "choice",
+      "question": "ღ の発音はどれ？",
+      "choices": ["ɣ（有声軟口蓋摩擦音）", "g", "h", "x"],
+      "answer": "ɣ（有声軟口蓋摩擦音）"
+    },
+    {
+      "type": "choice",
+      "question": "ს の発音はどれ？",
+      "choices": ["s", "z", "sh", "ts"],
+      "answer": "s"
+    },
+    {
+      "type": "choice",
+      "question": "ზ の発音はどれ？",
+      "choices": ["s", "z", "sh", "dz"],
+      "answer": "z"
+    },
+    {
+      "type": "choice",
+      "question": "შ の発音はどれ？",
+      "choices": ["sh", "s", "zh", "ch"],
+      "answer": "sh"
+    },
+    {
+      "type": "choice",
+      "question": "ჟ の発音はどれ？",
+      "choices": ["zh", "sh", "z", "j"],
+      "answer": "zh"
+    },
+    {
+      "type": "choice",
+      "question": "ხ の発音はどれ？",
+      "choices": ["kh", "h", "g", "k"],
+      "answer": "kh"
+    },
+    {
+      "type": "choice",
+      "question": "ჰ の発音はどれ？",
+      "choices": ["h", "kh", "g", "s"],
+      "answer": "h"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「v」に対応する文字は？",
+      "answer": "ვ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「ɣ」に対応する文字は？",
+      "answer": "ღ"
+    }
+  ]
+},
+    {
+  "id": "E",
+  "title": "文字⑤：共鳴音系",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "მ の発音はどれ？",
+      "choices": ["m", "n", "b", "w"],
+      "answer": "m"
+    },
+    {
+      "type": "choice",
+      "question": "ნ の発音はどれ？",
+      "choices": ["n", "m", "d", "l"],
+      "answer": "n"
+    },
+    {
+      "type": "choice",
+      "question": "ლ の発音はどれ？",
+      "choices": ["l", "r", "n", "d"],
+      "answer": "l"
+    },
+    {
+      "type": "choice",
+      "question": "რ の発音はどれ？",
+      "choices": ["r（巻き舌音）", "l", "h", "n"],
+      "answer": "r（巻き舌音）"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「m」に対応する文字は？",
+      "answer": "მ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「n」に対応する文字は？",
+      "answer": "ნ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「l」に対応する文字は？",
+      "answer": "ლ"
+    },
+    {
+      "type": "input",
+      "question": "ジョージア語で「r（巻き舌音）」に対応する文字は？",
+      "answer": "რ"
+    }
+  ]
+    },
+    {
       "id": 1,
       "title": "基本の挨拶",
       "quizzes": [
