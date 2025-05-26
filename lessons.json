@@ -1,6 +1,67 @@
 {
   "lessons": [
     {
+  "id": "A",
+  "title": "文字①：母音字",
+  "quizzes": [
+    {
+      "type": "choice",
+      "question": "ジョージア文字 „ა“ の発音は？",
+      "choices": ["e", "a", "i", "u"],
+      "answer": "a"
+    },
+    {
+      "type": "input",
+      "question": "「a」に対応するジョージア文字は？",
+      "answer": "ა"
+    },
+    {
+      "type": "choice",
+      "question": "ジョージア文字 „ე“ の発音は？",
+      "choices": ["e", "o", "i", "a"],
+      "answer": "e"
+    },
+    {
+      "type": "input",
+      "question": "「e」に対応するジョージア文字は？",
+      "answer": "ე"
+    },
+    {
+      "type": "choice",
+      "question": "ジョージア文字 „ი“ の発音は？",
+      "choices": ["u", "i", "e", "o"],
+      "answer": "i"
+    },
+    {
+      "type": "input",
+      "question": "「i」に対応するジョージア文字は？",
+      "answer": "ი"
+    },
+    {
+      "type": "choice",
+      "question": "ジョージア文字 „ო“ の発音は？",
+      "choices": ["a", "u", "e", "o"],
+      "answer": "o"
+    },
+    {
+      "type": "input",
+      "question": "「o」に対応するジョージア文字は？",
+      "answer": "ო"
+    },
+    {
+      "type": "choice",
+      "question": "ジョージア文字 „უ“ の発音は？",
+      "choices": ["i", "u", "a", "e"],
+      "answer": "u"
+    },
+    {
+      "type": "input",
+      "question": "「u」に対応するジョージア文字は？",
+      "answer": "უ"
+    }
+  ]
+},
+    {
       "id": 1,
       "title": "基本の挨拶",
       "quizzes": [
