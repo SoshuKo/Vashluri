@@ -140,6 +140,8 @@
     let currentQuiz = 0;
     let score = 0;
     let quizzes = [];
+    let incorrectQuizzes = [];
+    let retryMode = false;
     let timer = 0;
     let timerInterval;
 
@@ -209,7 +211,7 @@
             answered = true;
             disableAllButtons(block);
             const correct = choice === quiz.answer;
-            checkAnswer(correct, quiz.answer);
+            checkAnswer(correct, quiz);
             showJudgeMark(correct);
           };
           block.appendChild(btn);
@@ -226,7 +228,7 @@
           answered = true;
           disableAllButtons(block);
           const correct = input.value.trim() === quiz.answer;
-          checkAnswer(correct, quiz.answer);
+          checkAnswer(correct, quiz);
           showJudgeMark(correct);
         };
         inputWrap.appendChild(input);
@@ -264,10 +266,14 @@
       container.querySelectorAll('button').forEach(btn => btn.disabled = true);
     }
 
-    function checkAnswer(isCorrect, correctAnswer) {
+    function checkAnswer(isCorrect, quiz) {
       const result = document.getElementById('result');
-      result.textContent = isCorrect ? '✅ 正解！' : `❌ 不正解。正解は「${correctAnswer}」です。`;
-      if (isCorrect) score++;
+      result.textContent = isCorrect ? '✅ 正解！' : `❌ 不正解。正解は「${quiz.answer}」です。`;
+      if (isCorrect) {
+        score++;
+      } else {
+        incorrectQuizzes.push(quiz);
+      }
       updateScoreDisplay();
 
       const nextBtn = document.createElement('button');
@@ -279,7 +285,17 @@
           showQuiz(currentQuiz);
         } else {
           stopTimer();
-          showFinalResult();
+          if (!retryMode && incorrectQuizzes.length > 0) {
+            quizzes = shuffle([...incorrectQuizzes]);
+            incorrectQuizzes = [];
+            currentQuiz = 0;
+            retryMode = true;
+            score = 0;
+            startTimer();
+            showQuiz(currentQuiz);
+          } else {
+            showFinalResult();
+          }
         }
       };
       result.appendChild(nextBtn);
