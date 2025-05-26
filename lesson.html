@@ -14,7 +14,13 @@
       color: #d63031;
       text-align: center;
       font-size: 1.8em;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+    }
+    #scoreDisplay {
+      text-align: center;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      color: #2d3436;
     }
     .quiz-block {
       background-color: #ffffff;
@@ -96,6 +102,7 @@
 </head>
 <body>
   <h1>レッスン <span id="lessonId"></span></h1>
+  <div id="scoreDisplay"></div>
   <div id="quizContainer"></div>
   <div id="result"></div>
   <div id="finalResult"></div>
@@ -117,10 +124,15 @@
       return array;
     }
 
+    function updateScoreDisplay() {
+      document.getElementById('scoreDisplay').textContent = `スコア：${score} / ${quizzes.length}`;
+    }
+
     function showQuiz(index) {
       const container = document.getElementById('quizContainer');
       container.innerHTML = '';
       document.getElementById('result').textContent = '';
+      updateScoreDisplay();
 
       const quiz = quizzes[index];
       if (!quiz) return;
@@ -132,11 +144,18 @@
       title.textContent = `Q${index + 1}: ${quiz.question}`;
       block.appendChild(title);
 
+      let answered = false;
+
       if (quiz.type === 'choice') {
         quiz.choices.forEach(choice => {
           const btn = document.createElement('button');
           btn.textContent = choice;
-          btn.onclick = () => checkAnswer(choice === quiz.answer, quiz.answer);
+          btn.onclick = () => {
+            if (answered) return;
+            answered = true;
+            disableAllButtons(block);
+            checkAnswer(choice === quiz.answer, quiz.answer);
+          };
           block.appendChild(btn);
         });
       } else if (quiz.type === 'input') {
@@ -146,7 +165,12 @@
         const submit = document.createElement('button');
         submit.className = 'submit-btn';
         submit.textContent = '送信';
-        submit.onclick = () => checkAnswer(input.value.trim() === quiz.answer, quiz.answer);
+        submit.onclick = () => {
+          if (answered) return;
+          answered = true;
+          disableAllButtons(block);
+          checkAnswer(input.value.trim() === quiz.answer, quiz.answer);
+        };
         inputWrap.appendChild(input);
 
         const keyboard = document.createElement('div');
@@ -172,18 +196,21 @@
       hintBtn.textContent = '答えを見る';
       hintBtn.className = 'submit-btn';
       hintBtn.style.backgroundColor = '#636e72';
-      hintBtn.onclick = () => {
-        alert(`正解：${quiz.answer}`);
-      };
+      hintBtn.onclick = () => alert(`正解：${quiz.answer}`);
       block.appendChild(hintBtn);
 
       container.appendChild(block);
+    }
+
+    function disableAllButtons(container) {
+      container.querySelectorAll('button').forEach(btn => btn.disabled = true);
     }
 
     function checkAnswer(isCorrect, correctAnswer) {
       const result = document.getElementById('result');
       result.textContent = isCorrect ? '✅ 正解！' : `❌ 不正解。正解は「${correctAnswer}」です。`;
       if (isCorrect) score++;
+      updateScoreDisplay();
 
       const nextBtn = document.createElement('button');
       nextBtn.className = 'next-btn';
