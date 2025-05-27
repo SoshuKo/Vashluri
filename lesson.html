@@ -178,10 +178,40 @@
 
     function showJudgeMark(isCorrect) {
       const mark = document.getElementById('judgeMark');
-      mark.textContent = isCorrect ? '◯' : '×';
+      mark.textContent = isCorrect ? '○' : '×';
       mark.className = isCorrect ? '' : 'incorrect';
       mark.style.opacity = 1;
       setTimeout(() => { mark.style.opacity = 0; }, 1000);
+    }
+
+    function getFileName(id) {
+      const n = parseInt(id, 10);
+      if (n >= 1 && n <= 100) return 'lessons/lessons-01.json';
+      else return null;
+    }
+
+    const targetFile = getFileName(lessonId);
+
+    if (!targetFile) {
+      document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
+    } else {
+      fetch(targetFile + '?v=' + Date.now())
+        .then(response => response.json())
+        .then(data => {
+          const lesson = data.lessons.find(l => String(l.id) === lessonId);
+          if (!lesson || !lesson.quizzes) {
+            document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
+            return;
+          }
+          document.getElementById('lessonId').textContent = `${lessonId}：${lesson.title}`;
+          quizzes = shuffle([...lesson.quizzes]);
+          startTimer();
+          showQuiz(currentQuiz);
+        })
+        .catch(error => {
+          console.error('読み込みエラー:', error);
+          document.getElementById('quizContainer').innerHTML = '<p>読み込みエラーが発生しました。</p>';
+        });
     }
 
     function showQuiz(index) {
@@ -311,24 +341,7 @@
         <a href="lessons.html?v=1" class="next-btn">レッスン選択ページに戻る</a>
       `;
     }
-
-    fetch('lessons.json?v=' + Date.now())
-      .then(response => response.json())
-      .then(data => {
-        const lesson = data.lessons.find(l => l.id == lessonId);
-        if (!lesson || !lesson.quizzes) {
-          document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
-          return;
-        }
-        document.getElementById('lessonId').textContent = `${lessonId}：${lesson.title}`;
-        quizzes = shuffle([...lesson.quizzes]);
-        startTimer();
-        showQuiz(currentQuiz);
-      })
-      .catch(error => {
-        console.error('読み込みエラー:', error);
-        document.getElementById('quizContainer').innerHTML = '<p>読み込みエラーが発生しました。</p>';
-      });
   </script>
 </body>
 </html>
+
