@@ -304,40 +304,57 @@ function getFileName(id) {
       container.querySelectorAll('button').forEach(btn => btn.disabled = true);
     }
 
-    function checkAnswer(isCorrect, quiz) {
-      const result = document.getElementById('result');
-      result.textContent = isCorrect ? '✅ 正解！' : `❌ 不正解。正解は「${quiz.answer}」です。`;
-      if (isCorrect) {
-        score++;
-      } else {
-        incorrectQuizzes.push(quiz);
-      }
-      updateScoreDisplay();
+function checkAnswer(isCorrect, quiz) {
+  const result = document.getElementById('result');
+  let userInput = null;
 
-      const nextBtn = document.createElement('button');
-      nextBtn.className = 'next-btn';
-      nextBtn.textContent = '次へ';
-      nextBtn.onclick = () => {
-        currentQuiz++;
-        if (currentQuiz < quizzes.length) {
-          showQuiz(currentQuiz);
-        } else {
-          stopTimer();
-          if (!retryMode && incorrectQuizzes.length > 0) {
-            quizzes = shuffle([...incorrectQuizzes]);
-            incorrectQuizzes = [];
-            currentQuiz = 0;
-            retryMode = true;
-            score = 0;
-            startTimer();
-            showQuiz(currentQuiz);
-          } else {
-            showFinalResult();
-          }
-        }
-      };
-      result.appendChild(nextBtn);
+  if (quiz.type === 'input') {
+    const inputField = document.querySelector('.input-answer input');
+    userInput = inputField.value.trim();
+
+    // 正解とユーザーの回答を単語ごとに分割し、ソートして比較
+    const normalize = str =>
+      str.trim().split(/\s+/).sort().join(' ');
+
+    const expected = normalize(quiz.answer);
+    const given = normalize(userInput);
+    isCorrect = (expected === given);
+  }
+
+  result.textContent = isCorrect ? '✅ 正解！' : `❌ 不正解。正解は「${quiz.answer}」です。`;
+
+  if (isCorrect) {
+    score++;
+  } else {
+    incorrectQuizzes.push(quiz);
+  }
+
+  updateScoreDisplay();
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'next-btn';
+  nextBtn.textContent = '次へ';
+  nextBtn.onclick = () => {
+    currentQuiz++;
+    if (currentQuiz < quizzes.length) {
+      showQuiz(currentQuiz);
+    } else {
+      stopTimer();
+      if (!retryMode && incorrectQuizzes.length > 0) {
+        quizzes = shuffle([...incorrectQuizzes]);
+        incorrectQuizzes = [];
+        currentQuiz = 0;
+        retryMode = true;
+        score = 0;
+        startTimer();
+        showQuiz(currentQuiz);
+      } else {
+        showFinalResult();
+      }
     }
+  };
+  result.appendChild(nextBtn);
+}
 
     function showFinalResult() {
       document.getElementById('quizContainer').innerHTML = '';
