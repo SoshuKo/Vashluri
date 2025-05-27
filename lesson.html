@@ -184,41 +184,40 @@
       setTimeout(() => { mark.style.opacity = 0; }, 1000);
     }
 
-    function getFileName(id) {
-      const n = parseInt(id, 10);
-      if (!isNaN(n) && n >= 1 && n <= 100) {
-        return 'lessons/lessons-01.json';
-      } else if (/^[A-Z]$/i.test(id)) {
-        return `lessons/letters-${id.toUpperCase()}.json`; // 例: letters-A.json
-      } else {
-        return null;
-      }
-    }
-
-
-    const targetFile = getFileName(lessonId);
-
-    if (!targetFile) {
-      document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
+  function getFileName(id) {
+    const n = parseInt(id, 10);
+    if (!isNaN(n) && n >= 1 && n <= 100) {
+      return 'lessons/lessons-01.json';
+    } else if (/^[A-Z]$/i.test(id)) {
+      return 'lessons/lessons-01.json'; // ← ここを letters-A.json に変えたい場合はこの行を変更
     } else {
-      fetch(targetFile + '?v=' + Date.now())
-        .then(response => response.json())
-        .then(data => {
-          const lesson = data.lessons.find(l => String(l.id) === lessonId);
-          if (!lesson || !lesson.quizzes) {
-            document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
-            return;
-          }
-          document.getElementById('lessonId').textContent = `${lessonId}：${lesson.title}`;
-          quizzes = shuffle([...lesson.quizzes]);
-          startTimer();
-          showQuiz(currentQuiz);
-        })
-        .catch(error => {
-          console.error('読み込みエラー:', error);
-          document.getElementById('quizContainer').innerHTML = '<p>読み込みエラーが発生しました。</p>';
-        });
+      return null;
     }
+  }
+
+  const targetFile = getFileName(lessonId);
+
+  if (!targetFile) {
+    document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
+  } else {
+    fetch(targetFile + '?v=' + Date.now())
+      .then(response => response.json())
+      .then(data => {
+        const lesson = data.lessons.find(l => String(l.id).toUpperCase() === lessonId.toUpperCase());
+        if (!lesson || !lesson.quizzes) {
+          document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
+          return;
+        }
+        document.getElementById('lessonId').textContent = `${lesson.id}：${lesson.title}`;
+        quizzes = shuffle([...lesson.quizzes]);
+        startTimer();
+        showQuiz(currentQuiz);
+      })
+      .catch(error => {
+        console.error('読み込みエラー:', error);
+        document.getElementById('quizContainer').innerHTML = '<p>読み込みエラーが発生しました。</p>';
+      });
+  }
 
     function showQuiz(index) {
       const container = document.getElementById('quizContainer');
