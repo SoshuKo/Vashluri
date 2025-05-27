@@ -184,6 +184,36 @@
       setTimeout(() => { mark.style.opacity = 0; }, 1000);
     }
 
+    function getFileName(id) {
+      const n = parseInt(id, 10);
+      if (n >= 1 && n <= 100) return 'lessons/lessons-01.json';
+      else return null;
+    }
+
+    const targetFile = getFileName(lessonId);
+
+    if (!targetFile) {
+      document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
+    } else {
+      fetch(targetFile + '?v=' + Date.now())
+        .then(response => response.json())
+        .then(data => {
+          const lesson = data.lessons.find(l => String(l.id) === lessonId);
+          if (!lesson || !lesson.quizzes) {
+            document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
+            return;
+          }
+          document.getElementById('lessonId').textContent = `${lessonId}：${lesson.title}`;
+          quizzes = shuffle([...lesson.quizzes]);
+          startTimer();
+          showQuiz(currentQuiz);
+        })
+        .catch(error => {
+          console.error('読み込みエラー:', error);
+          document.getElementById('quizContainer').innerHTML = '<p>読み込みエラーが発生しました。</p>';
+        });
+    }
+
     function showQuiz(index) {
       const container = document.getElementById('quizContainer');
       container.innerHTML = '';
@@ -311,26 +341,6 @@
         <a href="lessons.html?v=1" class="next-btn">レッスン選択ページに戻る</a>
       `;
     }
-
-    const isAlphaId = /^[a-zA-Z]$/.test(lessonId);
-    const fileName = isAlphaId ? `letters-${lessonId}.json` : `lessons-${lessonId.padStart(2, '0')}.json`;
-
-    fetch(fileName + '?v=' + Date.now())
-      .then(response => response.json())
-      .then(lesson => {
-        if (!lesson || !lesson.quizzes) {
-          document.getElementById('quizContainer').innerHTML = '<p>レッスンデータが見つかりません。</p>';
-          return;
-        }
-        document.getElementById('lessonId').textContent = `${lessonId}：${lesson.title}`;
-        quizzes = shuffle([...lesson.quizzes]);
-        startTimer();
-        showQuiz(currentQuiz);
-      })
-      .catch(error => {
-        console.error('読み込みエラー:', error);
-        document.getElementById('quizContainer').innerHTML = '<p>読み込みエラーが発生しました。</p>';
-      });
   </script>
 </body>
 </html>
