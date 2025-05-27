@@ -186,9 +186,15 @@
 
     function getFileName(id) {
       const n = parseInt(id, 10);
-      if (n >= 1 && n <= 100) return 'lessons/lessons-01.json';
-      else return null;
+      if (!isNaN(n) && n >= 1 && n <= 100) {
+        return 'lessons/lessons-01.json';
+      } else if (/^[A-Z]$/i.test(id)) {
+        return `lessons/letters-${id.toUpperCase()}.json`; // 例: letters-A.json
+      } else {
+        return null;
+      }
     }
+
 
     const targetFile = getFileName(lessonId);
 
