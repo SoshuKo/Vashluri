@@ -184,16 +184,19 @@
       setTimeout(() => { mark.style.opacity = 0; }, 1000);
     }
 
-  function getFileName(id) {
-    const n = parseInt(id, 10);
-    if (!isNaN(n) && n >= 1 && n <= 100) {
+function getFileName(id) {
+  const n = parseInt(id, 10);
+  if (!isNaN(n)) {
+    if (n >= 1 && n <= 29) {
       return 'lessons/lessons-01.json';
-    } else if (/^[A-Z]$/i.test(id)) {
-      return 'lessons/lessons-01.json'; // ← ここを letters-A.json に変えたい場合はこの行を変更
-    } else {
-      return null;
+    } else if (n >= 30 && n <= 59) {
+      return 'lessons/lessons-02.json';
     }
+  } else if (/^[A-Z]$/i.test(id)) {
+    return `lessons/letters-${id.toUpperCase()}.json`; // 例: letters-A.json
   }
+  return null;
+}
 
   const targetFile = getFileName(lessonId);
 
