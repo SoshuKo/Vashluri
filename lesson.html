@@ -265,9 +265,8 @@ function getFileName(id) {
           if (answered) return;
           answered = true;
           disableAllButtons(block);
-          const correct = input.value.trim() === quiz.answer;
-          checkAnswer(correct, quiz);
-          showJudgeMark(correct);
+          const isCorrect = checkAnswer(input.value, quiz);
+          showJudgeMark(isCorrect);
         };
         inputWrap.appendChild(input);
 
@@ -304,21 +303,18 @@ function getFileName(id) {
       container.querySelectorAll('button').forEach(btn => btn.disabled = true);
     }
 
-function checkAnswer(isCorrect, quiz) {
+function checkAnswer(userInput, quiz) {
   const result = document.getElementById('result');
-  let userInput = null;
+  let isCorrect = false;
 
   if (quiz.type === 'input') {
-    const inputField = document.querySelector('.input-answer input');
-    userInput = inputField.value.trim();
-
-    // 正解とユーザーの回答を単語ごとに分割し、ソートして比較
     const normalize = str =>
       str.trim().split(/\s+/).sort().join(' ');
-
     const expected = normalize(quiz.answer);
-    const given = normalize(userInput);
+    const given = normalize(userInput.trim());
     isCorrect = (expected === given);
+  } else if (quiz.type === 'choice') {
+    isCorrect = (userInput === quiz.answer);
   }
 
   result.textContent = isCorrect ? '✅ 正解！' : `❌ 不正解。正解は「${quiz.answer}」です。`;
@@ -354,6 +350,7 @@ function checkAnswer(isCorrect, quiz) {
     }
   };
   result.appendChild(nextBtn);
+  return isCorrect;
 }
 
     function showFinalResult() {
