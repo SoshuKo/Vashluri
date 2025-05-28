@@ -192,11 +192,21 @@ function getFileName(id) {
     } else if (n >= 30 && n <= 59) {
       return 'lessons/lessons-02.json';
     }
-  } else if (/^[A-Z]$/i.test(id)) {
-    return `lessons/letters-${id.toUpperCase()}.json`; // 例: letters-A.json
   }
+
+  // アルファベットの場合でも lessons-01.json を参照
+  if (/^[A-Ea-e]$/.test(id)) {
+    return 'lessons/lessons-01.json';
+  }
+
+  // それ以外（例：F以降）なら letters-*.json にフォールバック
+  if (/^[A-Z]$/i.test(id)) {
+    return `lessons/letters-${id.toUpperCase()}.json`;
+  }
+
   return null;
 }
+
 
   const targetFile = getFileName(lessonId);
 
