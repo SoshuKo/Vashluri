@@ -248,9 +248,8 @@ function getFileName(id) {
             if (answered) return;
             answered = true;
             disableAllButtons(block);
-            const correct = choice === quiz.answer;
-            checkAnswer(correct, quiz);
-            showJudgeMark(correct);
+            const isCorrect = checkAnswer(choice, quiz);
+            showJudgeMark(isCorrect);  // ★ここも同様
           };
           block.appendChild(btn);
         });
@@ -266,7 +265,7 @@ function getFileName(id) {
           answered = true;
           disableAllButtons(block);
           const isCorrect = checkAnswer(input.value, quiz);
-          showJudgeMark(isCorrect);
+          showJudgeMark(isCorrect);  // ★正しい判定で ○ × 表示
         };
         inputWrap.appendChild(input);
 
@@ -350,7 +349,8 @@ function checkAnswer(userInput, quiz) {
     }
   };
   result.appendChild(nextBtn);
-  return isCorrect;
+
+  return isCorrect;  // ★正誤結果を返す
 }
 
     function showFinalResult() {
