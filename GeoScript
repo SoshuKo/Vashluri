@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジョージア文字練習 - Georgian Script Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn.active {
+            background: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .alphabet-grid {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .alphabet-grid h3 {
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+        
+        .letters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 10px;
+        }
+        
+        .letter-btn {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+        }
+        
+        .letter-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .letter-btn.selected {
+            background: #4ecdc4;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+        }
+        
+        .practice-area {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .current-letter {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .current-letter h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+        
+        .letter-info {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        #canvas {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            cursor: crosshair;
+            touch-action: none;
+            display: block;
+        }
+        
+        .canvas-container {
+            position: relative;
+            margin-bottom: 15px;
+            width: 100%;
+            height: 400px;
+        }
+        
+        .guide-canvas {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            pointer-events: none;
+            border-radius: 10px;
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 20px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .feedback {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            min-height: 30px;
+        }
+        
+        .success {
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+        
+        .encouragement {
+            color: #ffd93d;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #canvas {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇬🇪 ジョージア文字練習</h1>
+            <p>Georgian Script Writing Practice - マウスや指でなぞって文字を覚えよう</p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="clearBtn">クリア</button>
+            <button class="btn" id="nextBtn">次の文字</button>
+            <button class="btn" id="randomBtn">ランダム</button>
+        </div>
+        
+        <div class="main-content">
+            <div class="alphabet-grid">
+                <h3>ジョージア文字アルファベット</h3>
+                <div class="letters-grid" id="lettersGrid"></div>
+            </div>
+            
+            <div class="practice-area">
+                <div class="current-letter">
+                    <h2 id="currentLetter">ა</h2>
+                    <div class="letter-info">
+                        <div id="letterName">ან (an)</div>
+                        <div id="letterSound">[a]</div>
+                    </div>
+                </div>
+                
+                <div class="canvas-container">
+                    <canvas id="guideCanvas" class="guide-canvas"></canvas>
+                    <canvas id="canvas"></canvas>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ジョージア文字データ（書き順情報付き）
+        const georgianLetters = [
+            {char: 'ა', name: 'ან', sound: '[a]', strokes: ['右上から左下へ曲線', '左下から右上へ小さな線']},
+            {char: 'ბ', name: 'ბან', sound: '[b]', strokes: ['上から下へ縦線', '右へ半円を描く']},
+            {char: 'გ', name: 'გან', sound: '[ɡ]', strokes: ['上から下へ曲線', '右下に小さな丸']},
+            {char: 'დ', name: 'დონ', sound: '[d]', strokes: ['左上から右下へ曲線', '下部で右に曲げる']},
+            {char: 'ე', name: 'ენ', sound: '[ɛ]', strokes: ['右上から左下へ', '下で右に曲線']},
+            {char: 'ვ', name: 'ვინ', sound: '[v]', strokes: ['上から下へ曲線', '右に小さな突起']},
+            {char: 'ზ', name: 'ზენ', sound: '[z]', strokes: ['右上から左下へ', '下部で小さく右へ']},
+            {char: 'თ', name: 'თან', sound: '[tʰ]', strokes: ['上部に小さな丸', '下に縦線']},
+            {char: 'ი', name: 'ინ', sound: '[i]', strokes: ['上から下へ縦線', '上に小さな点']},
+            {char: 'კ', name: 'კან', sound: '[kʼ]', strokes: ['左から右へ曲線', '下に垂直線']},
+            {char: 'ლ', name: 'ლას', sound: '[l]', strokes: ['上から下へ曲線', '右下で丸く']},
+            {char: 'მ', name: 'მან', sound: '[m]', strokes: ['左から右へ波線', '下に縦線']},
+            {char: 'ნ', name: 'ნარ', sound: '[n]', strokes: ['上から下へ曲線', '右に小さな線']},
+            {char: 'ო', name: 'ონ', sound: '[ɔ]', strokes: ['時計回りに円を描く']},
+            {char: 'პ', name: 'პარ', sound: '[pʼ]', strokes: ['上から下へ縦線', '右に半円', '下に突起']},
+            {char: 'ჟ', name: 'ჟან', sound: '[ʒ]', strokes: ['上部に小さな曲線', '下に大きな曲線']},
+            {char: 'რ', name: 'რაე', sound: '[r]', strokes: ['左上から右下へ曲線', '右に小さな線']},
+            {char: 'ს', name: 'სან', sound: '[s]', strokes: ['右上から左下へS字曲線']},
+            {char: 'ტ', name: 'ტარ', sound: '[tʼ]', strokes: ['上から下へ縦線', '上部に横線']},
+            {char: 'უ', name: 'უნ', sound: '[u]', strokes: ['右上から左下へ曲線', '右下に小さな丸']},
+            {char: 'ფ', name: 'ფარ', sound: '[pʰ]', strokes: ['上から下へ縦線', '右に半円', '左下に突起']},
+            {char: 'ქ', name: 'ქან', sound: '[qʰ]', strokes: ['右上から左下へ曲線', '下に長い突起']},
+            {char: 'ღ', name: 'ღან', sound: '[ɣ]', strokes: ['上部に小さな曲線', '下に大きな曲線', '右下に突起']},
+            {char: 'ყ', name: 'ყარ', sound: '[qʼ]', strokes: ['右上から左下へ曲線', '中央に小さな線', '下に突起']},
+            {char: 'შ', name: 'შინ', sound: '[ʃ]', strokes: ['左から右へ波線', '上に3つの突起']},
+            {char: 'ჩ', name: 'ჩინ', sound: '[tʃʰ]', strokes: ['上から下へ縦線', '右に曲線', '下に突起']},
+            {char: 'ც', name: 'ცან', sound: '[tsʰ]', strokes: ['右上から左下へ曲線', '上に小さな線']},
+            {char: 'ძ', name: 'ძილ', sound: '[dz]', strokes: ['左上から右下へ曲線', '上に小さな突起']},
+            {char: 'წ', name: 'წილ', sound: '[tsʼ]', strokes: ['右上から左下へ曲線', '上に小さな線', '下に突起']},
+            {char: 'ჭ', name: 'ჭარ', sound: '[tʃʼ]', strokes: ['上から下へ縦線', '右に曲線', '下に長い突起']},
+            {char: 'ხ', name: 'ხან', sound: '[x]', strokes: ['左上から右下へ斜線', '右上から左下へ斜線']},
+            {char: 'ჯ', name: 'ჯან', sound: '[dʒ]', strokes: ['右上から左下へ曲線', '下に長い突起']},
+            {char: 'ჰ', name: 'ჰაე', sound: '[h]', strokes: ['上から下へ縦線', '右に小さな曲線']}
+        ];
+
+        let currentLetterIndex = 0;
+        let canvas, ctx, guideCanvas, guideCtx;
+        let isDrawing = false;
+        let strokeCount = 0;
+        let totalStrokes = 0;
+        let userPath = [];
+        let guideImageData = null;
+
+        // 初期化
+        window.addEventListener('load', function() {
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            guideCanvas = document.getElementById('guideCanvas');
+            guideCtx = guideCanvas.getContext('2d');
+            
+            setupCanvas();
+            createLetterGrid();
+            displayCurrentLetter();
+            setupEventListeners();
+            
+            // 初期ガイド描画
+            drawGuide();
+        });
+
+        function setupCanvas() {
+            // キャンバスサイズを設定
+            const container = canvas.parentElement;
+            const containerWidth = container.offsetWidth;
+            const containerHeight = 400;
+            
+            canvas.width = containerWidth - 6; // ボーダー分を引く
+            canvas.height = containerHeight - 6;
+            canvas.style.width = (containerWidth - 6) + 'px';
+            canvas.style.height = (containerHeight - 6) + 'px';
+            
+            guideCanvas.width = canvas.width;
+            guideCanvas.height = canvas.height;
+            guideCanvas.style.width = canvas.style.width;
+            guideCanvas.style.height = canvas.style.height;
+            
+            // 描画設定
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#2c3e50';
+            
+            guideCtx.lineCap = 'round';
+            guideCtx.lineJoin = 'round';
+            guideCtx.lineWidth = 1;
+            guideCtx.strokeStyle = 'rgba(52, 152, 219, 0.3)';
+        }
+
+        function createLetterGrid() {
+            const grid = document.getElementById('lettersGrid');
+            georgianLetters.forEach((letter, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'letter-btn';
+                btn.textContent = letter.char;
+                btn.onclick = () => selectLetter(index);
+                grid.appendChild(btn);
+            });
+        }
+
+        function selectLetter(index) {
+            currentLetterIndex = index;
+            displayCurrentLetter();
+            updateLetterSelection();
+        }
+
+        function displayCurrentLetter() {
+            const letter = georgianLetters[currentLetterIndex];
+            document.getElementById('currentLetter').textContent = letter.char;
+            document.getElementById('letterName').textContent = letter.name;
+            document.getElementById('letterSound').textContent = letter.sound;
+            
+            clearCanvas();
+            updateProgress();
+        }
+
+        function updateLetterSelection() {
+            const buttons = document.querySelectorAll('.letter-btn');
+            buttons.forEach((btn, index) => {
+                btn.classList.toggle('selected', index === currentLetterIndex);
+            });
+        }
+
+        function clearCanvas() {
+            // ユーザーの描画だけをクリア
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            strokeCount = 0;
+            userPath = [];
+            updateProgress();
+            document.getElementById('feedback').textContent = '';
+            // ガイドは再描画
+            drawGuide();
+        }
+
+        function drawGuide() {
+            const letter = georgianLetters[currentLetterIndex];
+            guideCtx.clearRect(0, 0, guideCanvas.width, guideCanvas.height);
+            
+            // 画像に基づいた4本の基準線を描画
+            const height = guideCanvas.height;
+            const width = guideCanvas.width;
+            
+            // 基準線の位置（画像の罫線に基づく）
+            const topLine = height * 0.15;      // 上端線
+            const upperLine = height * 0.35;    // 上部基準線
+            const lowerLine = height * 0.65;    // 下部基準線  
+            const bottomLine = height * 0.85;   // 下端線
+            
+            // 横線（基準線）
+            guideCtx.strokeStyle = 'rgba(150, 150, 150, 0.4)';
+            guideCtx.lineWidth = 1;
+            guideCtx.setLineDash([3, 3]);
+            
+            // 4本の横線を描画
+            [topLine, upperLine, lowerLine, bottomLine].forEach(y => {
+                guideCtx.beginPath();
+                guideCtx.moveTo(0, y);
+                guideCtx.lineTo(width, y);
+                guideCtx.stroke();
+            });
+            
+            // 縦の中央線
+            guideCtx.beginPath();
+            guideCtx.moveTo(width / 2, 0);
+            guideCtx.lineTo(width / 2, height);
+            guideCtx.stroke();
+            
+            guideCtx.setLineDash([]);
+            
+            // ガイド文字を適切な位置に描画（上部基準線と下部基準線の間）
+            const textCenterY = (upperLine + lowerLine) / 2;
+            guideCtx.font = '120px Georgia, serif';
+            guideCtx.fillStyle = 'rgba(52, 152, 219, 0.25)';
+            guideCtx.strokeStyle = 'rgba(52, 152, 219, 0.4)';
+            guideCtx.lineWidth = 2;
+            guideCtx.textAlign = 'center';
+            guideCtx.textBaseline = 'middle';
+            
+            // 文字の輪郭を描画してガイドパスを作成
+            guideCtx.strokeText(letter.char, width / 2, textCenterY);
+            guideCtx.fillText(letter.char, width / 2, textCenterY);
+            
+            // ガイドの画像データを取得（判定用）
+            guideImageData = guideCtx.getImageData(0, 0, width, height);
+        }
+
+        function updateProgress() {
+            const progress = Math.min((strokeCount / 10) * 100, 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            if (progress >= 70) {
+                showFeedback('とても上手です！ よくできました！', 'success');
+            } else if (progress >= 40) {
+                showFeedback('いい調子です！ もう少し練習してみましょう', 'encouragement');
+            }
+        }
+
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = 'feedback ' + type;
+        }
+
+        function setupEventListeners() {
+            // マウスイベント
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            // タッチイベント
+            canvas.addEventListener('touchstart', handleTouch);
+            canvas.addEventListener('touchmove', handleTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+
+            // ボタンイベント
+            document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+            document.getElementById('nextBtn').addEventListener('click', nextLetter);
+            document.getElementById('randomBtn').addEventListener('click', randomLetter);
+
+            // ウィンドウリサイズ
+            window.addEventListener('resize', function() {
+                setupCanvas();
+                drawGuide();
+            });
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            strokeCount++;
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            userPath.push({x, y});
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            
+            userPath.push({x, y});
+            checkAccuracy();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function checkAccuracy() {
+            if (!guideImageData || userPath.length < 10) return;
+            
+            let matchCount = 0;
+            let totalPoints = 0;
+            
+            // ユーザーの描画パスをチェック
+            for (let i = 0; i < userPath.length; i += 3) { // サンプリング間隔を調整
+                const point = userPath[i];
+                const x = Math.floor(point.x);
+                const y = Math.floor(point.y);
+                
+                if (x >= 0 && x < guideImageData.width && y >= 0 && y < guideImageData.height) {
+                    const pixelIndex = (y * guideImageData.width + x) * 4;
+                    const alpha = guideImageData.data[pixelIndex + 3];
+                    
+                    totalPoints++;
+                    if (alpha > 50) { // ガイドの線の近くにある場合
+                        matchCount++;
+                    }
+                }
+            }
+            
+            if (totalPoints > 0) {
+                const accuracy = (matchCount / totalPoints) * 100;
+                updateProgressWithAccuracy(accuracy);
+                
+                if (accuracy > 70) {
+                    showFeedback('素晴らしい！正確になぞれました！', 'success');
+                } else if (accuracy > 50) {
+                    showFeedback('いい調子です！もう少し正確になぞってみましょう', 'encouragement');
+                }
+            }
+        }
+
+        function updateProgressWithAccuracy(accuracy) {
+            const progress = Math.min(accuracy, 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
+                                            e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        function nextLetter() {
+            currentLetterIndex = (currentLetterIndex + 1) % georgianLetters.length;
+            displayCurrentLetter();
+            updateLetterSelection();
+        }
+
+        function randomLetter() {
+            const randomIndex = Math.floor(Math.random() * georgianLetters.length);
+            selectLetter(randomIndex);
+        }
+
+        // 初期選択
+        setTimeout(() => {
+            updateLetterSelection();
+        }, 100);
+    </script>
+</body>
+</html>
