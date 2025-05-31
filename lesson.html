@@ -362,17 +362,47 @@ function checkAnswer(userInput, quiz) {
 
   return isCorrect;  // ★正誤結果を返す
 }
+    
+    function recordStreak() {
+  const today = new Date().toISOString().split('T')[0]; // 今日の日付（例: "2025-06-01"）
+  const lastDate = localStorage.getItem('lastCompletedDate');
+  let streak = parseInt(localStorage.getItem('currentStreak') || '0');
+  let maxStreak = parseInt(localStorage.getItem('maxStreak') || '0');
 
-    function showFinalResult() {
-      document.getElementById('quizContainer').innerHTML = '';
-      document.getElementById('result').textContent = '';
-      document.getElementById('finalResult').innerHTML = `
-        <p>🎉 レッスン完了！</p>
-        <p>スコア：${score} / ${quizzes.length}</p>
-        <p>タイム：${document.getElementById('timerDisplay').textContent.replace('タイム：', '')}</p>
-        <a href="lessons.html?v=1" class="next-btn">レッスン選択ページに戻る</a>
-      `;
-    }
+  if (lastDate === today) {
+    // すでに記録済みなら何もしない
+    return;
+  }
+
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+
+  if (lastDate === yesterday) {
+    streak += 1;
+  } else {
+    streak = 1;
+  }
+
+  if (streak > maxStreak) maxStreak = streak;
+
+  localStorage.setItem('lastCompletedDate', today);
+  localStorage.setItem('currentStreak', streak);
+  localStorage.setItem('maxStreak', maxStreak);
+}
+
+function showFinalResult() {
+  recordStreak();  // ← 追加
+
+  document.getElementById('quizContainer').innerHTML = '';
+  document.getElementById('result').textContent = '';
+  document.getElementById('finalResult').innerHTML = `
+    <p>🎉 レッスン完了！</p>
+    <p>スコア：${score} / ${quizzes.length}</p>
+    <p>タイム：${document.getElementById('timerDisplay').textContent.replace('タイム：', '')}</p>
+    <p>🔥 連続学習日数：${localStorage.getItem('currentStreak')}日</p>
+    <p>🏆 最長連続記録：${localStorage.getItem('maxStreak')}日</p>
+    <a href="lessons.html?v=1" class="next-btn">レッスン選択ページに戻る</a>
+  `;
+}
   </script>
 </body>
 </html>
