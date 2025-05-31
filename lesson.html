@@ -390,7 +390,11 @@ function checkAnswer(userInput, quiz) {
 }
 
 function showFinalResult() {
-  recordStreak();  // ← 追加
+  recordStreak();  // ストリーク記録
+
+  const scoreText = `🎉 レッスン${lessonId}完了！スコア：${score}/${quizzes.length}、連続学習日数：${localStorage.getItem('currentStreak')}日`;
+  const url = encodeURIComponent(window.location.origin + '/lessons.html');
+  const tweet = encodeURIComponent(scoreText + ' #ვაშლური');
 
   document.getElementById('quizContainer').innerHTML = '';
   document.getElementById('result').textContent = '';
@@ -400,6 +404,13 @@ function showFinalResult() {
     <p>タイム：${document.getElementById('timerDisplay').textContent.replace('タイム：', '')}</p>
     <p>🔥 連続学習日数：${localStorage.getItem('currentStreak')}日</p>
     <p>🏆 最長連続記録：${localStorage.getItem('maxStreak')}日</p>
+
+    <div style="margin: 20px 0;">
+      <a class="next-btn" href="https://twitter.com/intent/tweet?text=${tweet}&url=${url}" target="_blank">Twitterで共有</a><br>
+      <a class="next-btn" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" style="background-color:#3b5998;">Facebookで共有</a><br>
+      <a class="next-btn" href="https://social-plugins.line.me/lineit/share?url=${url}" target="_blank" style="background-color:#00c300;">LINEで共有</a>
+    </div>
+
     <a href="lessons.html?v=1" class="next-btn">レッスン選択ページに戻る</a>
   `;
 }
