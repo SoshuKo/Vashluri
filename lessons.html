@@ -108,6 +108,14 @@
       console.error('レッスンデータの取得に失敗しました:', error);
       list.textContent = '読み込みエラーが発生しました。';
     });
+
+    const streak = localStorage.getItem('currentStreak') || 0;
+    const maxStreak = localStorage.getItem('maxStreak') || 0;
+    const streakBanner = document.createElement('div');
+    streakBanner.style.textAlign = 'center';
+    streakBanner.style.marginTop = '20px';
+    streakBanner.innerHTML = `<p>🔥 連続学習日数: ${streak}日 ／ 🏆 最長記録: ${maxStreak}日</p>`;
+    document.body.insertBefore(streakBanner, document.querySelector('.nav-links'));
   </script>
 </body>
 </html>
